@@ -1,0 +1,1 @@
+wails build -clean -platform windows/amd64 -upx -webview2 error -ldflags "-s -w" -trimpath 
