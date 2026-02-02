@@ -65,6 +65,11 @@ func FromUrl(
 		acceptRanges = ""
 	}
 
+	if headResp.StatusCode == http.StatusNotFound {
+		// 404
+		return "", fmt.Errorf("file not found: %s", fileURL)
+	}
+
 	var startByte int64 = 0
 	if !isOverride {
 		if fi, err := os.Stat(fileDownloadPath); err == nil {
@@ -195,6 +200,6 @@ func FromUrl(
 		return "", err
 	}
 
-	fmt.Print("\nDownload completed successfully!\n")
+	fmt.Printf("\nDownload file (%s) completed successfully!\n", fileDownloadPath)
 	return fileDownloadPath, nil
 }

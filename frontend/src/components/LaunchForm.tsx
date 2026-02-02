@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from "react"
-import { SubmitButton } from "./SubmitButton";
+import { useCallback } from "react"
+import { SubmitButton } from "./button/SubmitButton";
 
 import { useAppStore } from "@/stores/useAppStore"
 import { LaunchTheGame } from "../../wailsjs/go/app/App";
 
 import hytaleLogo from "@/assets/icons/hytale-logo.png"
+import FilesIcon from "./button/FilesIcon";
 
 export const LaunchForm: React.FC = () => {
   const { 
@@ -20,8 +21,8 @@ export const LaunchForm: React.FC = () => {
     if(username.length < 4)
       return 
 
-    LaunchTheGame(username, "4")
-  }, [username])
+    LaunchTheGame(username, versions[0])
+  }, [username, versions])
   
   return (
     <form 
@@ -55,8 +56,11 @@ export const LaunchForm: React.FC = () => {
             ))} 
           </select>
         </div>
-
-        <SubmitButton />
+        
+        <div className="flex">
+          <FilesIcon />
+          <SubmitButton />
+        </div>
       </div>
     </form>
   )

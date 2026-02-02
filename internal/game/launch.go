@@ -53,6 +53,11 @@ func Launch(ctx context.Context, playerName, gameVersion string) error {
 		return err
 	}
 
+	err = os.RemoveAll(env.GetDefaultCacheDir())
+	if err != nil {
+		fmt.Printf("Warning: Could not clear cache dir: %v\n", err)
+	}
+
 	playerUUID := config.AppConf.PlayerUUID
 
 	progress.SetProgressStatus(fmt.Sprintf("Oyun calistiriliyor (Hytale - branch: %s, v%s)", gameBranch, gameVersion), 100)

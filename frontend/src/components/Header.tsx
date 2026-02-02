@@ -1,7 +1,7 @@
-import closeIcon from "@/assets/icons/close-x.svg";
 import { Quit } from "@wailsapp/runtime";
 import { useCallback } from "react";
 
+import closeIcon from "@/assets/icons/close-x.svg";
 import hytaleIconH from "@/assets/icons/hytale-icon-h.png";
 
 export const Header: React.FC = () => {

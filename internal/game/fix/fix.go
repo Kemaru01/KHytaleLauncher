@@ -11,7 +11,6 @@ func EnsureServerAndClientFix(
 	branch,
 	version string) error {
 	osName, _ := env.GetDeviceInfo()
-	gameDir := env.GetGameDir(branch, version)
 
 	if osName != "windows" {
 		return nil
@@ -19,10 +18,14 @@ func EnsureServerAndClientFix(
 
 	progress.SetProgressStatus("Hytale fix dosyalari indiriliyor...", 0)
 
-	serverBat := filepath.Join(gameDir, "Server", "start-server.bat")
+	serverBat := filepath.Join(env.GetGameDir(branch, version), "Server", "start-server.bat")
 	if _, err := os.Stat(serverBat); err == nil {
 		return nil
 	}
 
-	return ApplyOnlineFixWindows(gameDir)
+	if err := ApplyOnlineFixWindows(branch, version); err != nil {
+		return nil
+	}
+
+	return nil
 }

@@ -6,18 +6,29 @@ import (
 	"runtime"
 )
 
+var (
+	AppEnv  = "prod" // default
+	AppName = "KHytaleLauncher"
+)
+
 func GetDeviceInfo() (string, string) {
 	return runtime.GOOS, runtime.GOARCH
 }
 
 func GetDefaultAppDir() string {
-	homedir, _ := os.UserHomeDir()
-	return filepath.Join(homedir, ".KHytaleLauncher")
+	base := os.Getenv("LOCALAPPDATA")
+
+	if base == "" {
+		home, _ := os.UserHomeDir()
+		base = home
+	}
+
+	return filepath.Join(base, "KHytaleLauncher")
 }
 
 func GetDefaultCacheDir() string {
 	appDir := GetDefaultAppDir()
-	return filepath.Join(appDir, ".cache")
+	return filepath.Join(appDir, "Cache")
 }
 
 func GetButlerDir() string {
@@ -37,7 +48,7 @@ func GetUserDataDir() string {
 
 func GetLogsDir() string {
 	appDir := GetDefaultAppDir()
-	return filepath.Join(appDir, "logs")
+	return filepath.Join(appDir, "Logs")
 }
 
 func GetGameDir(branch, version string) string {

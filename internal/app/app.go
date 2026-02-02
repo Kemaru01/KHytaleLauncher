@@ -6,6 +6,9 @@ import (
 	"KHytaleLauncher/internal/game"
 	"KHytaleLauncher/internal/progress"
 	"context"
+	"fmt"
+	"os/exec"
+	"runtime"
 )
 
 type App struct {
@@ -30,5 +33,30 @@ func (app *App) LaunchTheGame(
 	playerName,
 	gameVersion string) {
 
-	game.Launch(app.ctx, playerName, gameVersion)
+	if err := game.Launch(app.ctx, playerName, gameVersion); err != nil {
+		fmt.Printf("Error launching the game: %v\n", err)
+	}
+}
+
+func (app *App) OpenToDir() error {
+	var cmd *exec.Cmd
+
+	path := env.GetDefaultAppDir()
+	osName, _ := env.GetDeviceInfo()
+
+	switch osName {
+	case "windows":
+		cmd = exec.Command("explorer.exe", path)
+
+	case "darwin":
+		cmd = exec.Command("open", path)
+
+	case "linux":
+		cmd = exec.Command("xdg-open", path)
+
+	default:
+		return fmt.Errorf("unsupported OS: %s", runtime.GOOS)
+	}
+
+	return cmd.Start()
 }

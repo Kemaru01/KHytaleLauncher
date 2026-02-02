@@ -17,7 +17,7 @@ var AppConf *AppConfig = nil
 
 func RestoreDefaultConfig() (*AppConfig, error) {
 	return &AppConfig{
-		Version:    "0.1",
+		Version:    "0.2",
 		PlayerUUID: uuid.New().String(),
 	}, nil
 }

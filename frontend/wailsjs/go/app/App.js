@@ -5,3 +5,7 @@
 export function LaunchTheGame(arg1, arg2) {
   return window['go']['app']['App']['LaunchTheGame'](arg1, arg2);
 }
+
+export function OpenToDir() {
+  return window['go']['app']['App']['OpenToDir']();
+}
