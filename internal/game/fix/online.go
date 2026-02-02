@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	fixArchiveURL = "https://raw.githubusercontent.com/ArchDevs/HyLauncher/refs/heads/main/assets"
+	fixArchiveAssetsURL = "https://raw.githubusercontent.com/Kemaru01/KHytaleLauncher/refs/heads/main/assets/"
 )
 
 func ApplyOnlineFixWindows(
@@ -17,7 +17,7 @@ func ApplyOnlineFixWindows(
 	gameDir := env.GetGameDir(branch, version)
 	osName, _ := env.GetDeviceInfo()
 
-	downloadUrl := fmt.Sprintf("%s/%s/game/%s/%s", fixArchiveURL, osName, branch, version)
+	downloadUrl := fmt.Sprintf("%s/%s/game/%s/%s", fixArchiveAssetsURL, osName, branch, version)
 
 	serverJarPath := filepath.Join(gameDir, "Server", "HytaleServer.jar")
 	_, err := download.FromUrl(
