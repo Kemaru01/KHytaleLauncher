@@ -24,7 +24,7 @@ func EnsureServerAndClientFix(
 	}
 
 	if err := ApplyOnlineFixWindows(branch, version); err != nil {
-		return nil
+		return err
 	}
 
 	return nil
